@@ -13,6 +13,6 @@ The app shows details of the movie as the name, release date, user rating, and o
 <img src="https://github.com/daancover/PopularMovies/blob/master/img/Screenshot_20170125-133758.png?raw=true" width="300">
 <img src="https://github.com/daancover/PopularMovies/blob/master/img/Screenshot_20170125-133807.png?raw=true" width="300">
 
-Used libraries:
-Picasso - http://square.github.io/picasso/
+Used libraries: <br>
+Picasso - http://square.github.io/picasso/ <br>
 The Movie DB - https://www.themoviedb.org/
