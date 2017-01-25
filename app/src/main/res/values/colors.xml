@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- colors
+    F5B12E
+
+    EC3D33
+    097AFa
+
+    192466
+    30499B
+    367ABD
+    6BB8FF
+
+     -->
+
+    <color name="colorPrimaryDark">#00796B</color>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryLight">#B2DFDB</color>
+    <color name="primaryTextColor">#212121</color>
+    <color name="secondaryTextColor">#757575</color>
+    <color name="dividerColor">#BDBDBD</color>
+    <color name="colorAccent">#FF9800</color>
+</resources>

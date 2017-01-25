@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+
+    <string name="popular">Show Popular</string>
+
+    <string name="top_rated">Show Top Rated</string>
+
+    <string name="favorites">Show Favorites</string>
+
+    <string name="user_rating">User Rating:</string>
+
+    <string name="trailers">Trailers</string>
+
+    <string name="reviews">Reviews</string>
+
+    <string name="url_exception">Malformed URL Exception</string>
+
+    <string name="connection_error">Error trying to request data. Please make sure your device is connected to the internet</string>
+
+    <string name="json_exception">Could not retrieve data</string>
+
+    <string name="removed_favorite">Removed from favorites</string>
+    <string name="added_favorite">Added to favorites</string>
+
+</resources>
