@@ -1,6 +1,9 @@
 package com.example.android.movieclub;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.NavUtils;
@@ -57,7 +60,7 @@ public class DetailActivity extends AppCompatActivity implements TrailerAndRevie
     private ProgressBar mProgressBar;
     private RecyclerView mRecyclerView;
 
-    private FavoriteDAO db;
+    //private FavoriteDAO db;
     private boolean isFavorite;
 
     MovieData mMovieData;
@@ -115,8 +118,8 @@ public class DetailActivity extends AppCompatActivity implements TrailerAndRevie
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setAdapter(mAdapter);
 
-            db = new FavoriteDAO(DetailActivity.this);
-            isFavorite = db.exists(mMovieData);
+            //db = new FavoriteDAO(DetailActivity.this);
+            isFavorite = exists(mMovieData);
             Log.d(TAG, "FAVORITE " + isFavorite);
 
             hideMovieDataView();
@@ -322,14 +325,14 @@ public class DetailActivity extends AppCompatActivity implements TrailerAndRevie
         {
             if(isFavorite)
             {
-                db.deleteMovie(mMovieData);
+                deleteMovie(mMovieData);
                 isFavorite = false;
                 Toast.makeText(this, getString(R.string.removed_favorite), Toast.LENGTH_SHORT).show();
             }
 
             else
             {
-                db.saveFavorite(mMovieData);
+                saveFavorite(mMovieData);
                 isFavorite = true;
                 Toast.makeText(this, getString(R.string.added_favorite), Toast.LENGTH_SHORT).show();
             }
@@ -341,5 +344,48 @@ public class DetailActivity extends AppCompatActivity implements TrailerAndRevie
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void saveFavorite(MovieData movieData)
+    {
+        ContentValues values = new ContentValues();
+        values.put(FavoritesDB.POSTER, movieData.getPosterPath());
+        values.put(FavoritesDB.OVERVIEW, movieData.getOverview());
+        values.put(FavoritesDB.RELEASE_DATE, movieData.getReleaseDate());
+        values.put(FavoritesDB.TITLE, movieData.getTitle());
+        values.put(FavoritesDB.VOTE_AVERAGE, movieData.getVoteAverage());
+        values.put(FavoritesDB.ID, movieData.getId());
+
+        ContentResolver contentResolver = getContentResolver();
+
+        contentResolver.bulkInsert(FavoriteContract.FavoriteEntry.CONTENT_URI, new ContentValues[] {values});
+    }
+
+    public void deleteMovie(MovieData movieData)
+    {
+        String selection = FavoritesDB.TITLE + " = ?";
+
+        String[] selectionArgs = {movieData.getTitle()};
+
+        ContentResolver contentResolver = getContentResolver();
+
+        contentResolver.delete(FavoriteContract.FavoriteEntry.CONTENT_URI, selection, selectionArgs);
+    }
+
+    public boolean exists(MovieData movieData)
+    {
+        String selection = FavoritesDB.TITLE + "=?";
+
+        String[] selectionArgs = {movieData.getTitle()};
+
+        String[] columns = { FavoritesDB.TITLE };
+
+        ContentResolver contentResolver = getContentResolver();
+
+        Cursor cursor = contentResolver.query(FavoriteContract.FavoriteEntry.CONTENT_URI, columns, selection, selectionArgs, null);
+
+        //Log.d("DATABASE", cursor.getCount() + "");
+
+        return cursor.moveToFirst();
     }
 }

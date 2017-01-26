@@ -14,14 +14,14 @@
 
         <ProgressBar
             android:id="@+id/pb_progress_bar"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/progress_bar_size"
+            android:layout_width="@dimen/progress_bar_size"
             android:visibility="invisible"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/padding_big"
             tools:layout_constraintLeft_creator="1"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="16dp"
-            android:layout_width="48dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="@dimen/padding_big"
+            android:layout_marginTop="@dimen/padding_big"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <include
@@ -34,39 +34,31 @@
 
         <TextView
             android:id="@+id/tv_overview"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/MediumText"
-            tools:layout_conversion_absoluteX="16dp"
-            tools:layout_conversion_absoluteY="32dp"
-            tools:layout_conversion_absoluteWidth="560dp"
-            tools:layout_conversion_absoluteHeight="34dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/padding_big"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginRight="@dimen/padding_big"
+            android:layout_marginStart="@dimen/padding_big"
+            android:layout_marginLeft="@dimen/padding_big"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/movie_header"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="@dimen/padding_big"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_trailers"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:layout_conversion_absoluteX="16dp"
-            tools:layout_conversion_absoluteY="66dp"
-            tools:layout_conversion_absoluteWidth="560dp"
-            tools:layout_conversion_absoluteHeight="165dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/padding_big"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginRight="@dimen/padding_big"
+            android:layout_marginStart="@dimen/padding_big"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="@dimen/padding_big"
             app:layout_constraintTop_toBottomOf="@+id/tv_overview"
-            android:layout_marginTop="16dp"
-            app:layout_constraintHorizontal_bias="0.52"/>
+            android:layout_marginTop="@dimen/padding_big"
+            />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

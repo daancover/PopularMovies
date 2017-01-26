@@ -1,17 +1,8 @@
 package com.example.android.movieclub;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Daniel on 10/01/2017.
- */
+
 
 public class FavoriteDAO
 {
@@ -90,4 +81,4 @@ public class FavoriteDAO
 
         return cursor.moveToFirst();
     }
-}
+}*/

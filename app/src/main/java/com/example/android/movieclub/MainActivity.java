@@ -1,6 +1,8 @@
 package com.example.android.movieclub;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private RecyclerView mRecyclerView;
     private ProgressBar mProgressBar;
     private String mSortType;
-    private FavoriteDAO db;
+    //private FavoriteProvider db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -167,9 +169,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             if(params[0].equals(FAVORITES))
             {
-                db = new FavoriteDAO(MainActivity.this);
-
-                final List<MovieData> movies = db.loadMovies();
+                final List<MovieData> movies = loadMovies();
 
                 Log.d(TAG, "FAVORITES");
 
@@ -293,7 +293,35 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     {
         super.onResume();
 
-        /*mAdapter.setMovieData(null);
-        loadMovieData(mSortType);*/
+        mAdapter.setMovieData(null);
+        loadMovieData(mSortType);
+    }
+
+    public List<MovieData> loadMovies()
+    {
+        List<MovieData> returnList = new ArrayList<>();
+
+        String[] columns = {FavoriteContract.FavoriteEntry.COLUMN_POSTER, FavoriteContract.FavoriteEntry.COLUMN_OVERVIEW, FavoriteContract.FavoriteEntry.COLUMN_RELEASE_DATE,
+                FavoriteContract.FavoriteEntry.COLUMN_TITLE, FavoriteContract.FavoriteEntry.COLUMN_VOTE_AVERAGE, FavoriteContract.FavoriteEntry.COLUMN_ID };
+
+        ContentResolver contentResolver = getContentResolver();
+
+        Cursor cursor = contentResolver.query(FavoriteContract.FavoriteEntry.CONTENT_URI, columns, null, null, null);
+
+        while(cursor.moveToNext())
+        {
+            MovieData movie = new MovieData(cursor.getString(cursor.getColumnIndex(FavoriteContract.FavoriteEntry.COLUMN_POSTER)),
+                    cursor.getString(cursor.getColumnIndex(FavoriteContract.FavoriteEntry.COLUMN_RELEASE_DATE)),
+                    cursor.getString(cursor.getColumnIndex(FavoriteContract.FavoriteEntry.COLUMN_TITLE)),
+                    cursor.getString(cursor.getColumnIndex(FavoriteContract.FavoriteEntry.COLUMN_OVERVIEW)),
+                    cursor.getString(cursor.getColumnIndex(FavoriteContract.FavoriteEntry.COLUMN_VOTE_AVERAGE)),
+                    cursor.getString(cursor.getColumnIndex(FavoriteContract.FavoriteEntry.COLUMN_ID)));
+
+            returnList.add(movie);
+        }
+
+        cursor.close();
+
+        return returnList;
     }
 }

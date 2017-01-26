@@ -22,4 +22,6 @@
     <string name="removed_favorite">Removed from favorites</string>
     <string name="added_favorite">Added to favorites</string>
 
+    <string name="content_authority">com.example.android.movieclub</string>
+
 </resources>
